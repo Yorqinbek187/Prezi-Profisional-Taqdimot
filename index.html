@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prezi • Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 10% 30%, #e0e7ff, #a5b4fc);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      width: 100%;
+      max-width: 420px;
+      padding: 2rem 1.5rem;
+      border-radius: 32px;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .logo i {
+      font-size: 1.8rem;
+      color: #2563eb;
+      transition: font-size 0.2s;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+      transition: font-size 0.2s;
+    }
+
+    .subhead {
+      color: #475569;
+      font-size: 0.85rem;
+      margin-bottom: 1.8rem;
+      border-left: 4px solid #3b82f6;
+      padding-left: 14px;
+    }
+
+    .input-group {
+      margin-bottom: 1.3rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 14px;
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 13px 14px 13px 42px;
+      font-size: 0.95rem;
+      background: white;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      outline: none;
+      transition: all 0.2s;
+      font-weight: 500;
+      color: #0f172a;
+    }
+
+    .input-wrapper input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .input-wrapper .toggle-password {
+      position: absolute;
+      right: 14px;
+      background: none;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px;
+    }
+
+    .strength-bar {
+      margin-top: 8px;
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #strengthFill {
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s, background 0.3s;
+      border-radius: 10px;
+    }
+
+    .strength-text {
+      font-size: 0.7rem;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 18px 0 22px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #1e293b;
+      cursor: pointer;
+    }
+
+    .checkbox-label input {
+      width: 18px;
+      height: 18px;
+      accent-color: #2563eb;
+      cursor: pointer;
+    }
+
+    .login-btn {
+      background: #1e293b;
+      color: white;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 8px 20px rgba(30, 41, 59, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .login-btn:hover {
+      background: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    .login-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(30, 41, 59, 0.2);
+    }
+
+    #msg {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: 600;
+      min-height: 45px;
+      padding: 10px 14px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      word-break: break-word;
+    }
+
+    .demo-hint {
+      margin-top: 20px;
+      padding: 12px;
+      background: #f1f5f9;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      color: #475569;
+    }
+
+    .demo-hint details {
+      cursor: pointer;
+    }
+
+    .demo-hint summary {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+    }
+
+    .demo-hint ul {
+      list-style: none;
+      padding-left: 4px;
+    }
+
+    .demo-hint li {
+      padding: 3px 0;
+      border-bottom: 1px dashed #cbd5e1;
+      font-size: 0.75rem;
+    }
+
+    /* ========== RESPONSIVE MEDIA QUERIES ========== */
+
+    /* Planshetlar va kichik ekranlar (max-width: 600px) */
+    @media (max-width: 600px) {
+      body {
+        padding: 0.75rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+      }
+
+      .login-card {
+        max-width: 100%;
+        padding: 1.8rem 1.2rem;
+        border-radius: 24px;
+      }
+
+      .logo i {
+        font-size: 1.6rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .subhead {
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .input-group {
+        margin-bottom: 1rem;
+      }
+
+      .input-group label {
+        font-size: 0.7rem;
+      }
+
+      .input-wrapper input {
+        padding: 12px 12px 12px 40px;
+        font-size: 0.9rem;
+        border-radius: 12px;
+      }
+
+      .input-wrapper i {
+        left: 12px;
+        font-size: 0.95rem;
+      }
+
+      .login-btn {
+        padding: 13px;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Mobil telefonlar (max-width: 480px) */
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem;
+        padding-top: 1rem;
+      }
+
+      .login-card {
+        padding: 1.5rem 1rem;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .logo {
+        gap: 8px;
+      }
+
+      .logo i {
+        font-size: 1.4rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      .subhead {
+        font-size: 0.75rem;
+        margin-bottom: 1.2rem;
+        padding-left: 10px;
+      }
+
+      .input-group label {
+        font-size: 0.65rem;
+        letter-spacing: 0.3px;
+      }
+
+      .input-wrapper input {
+        padding: 11px 11px 11px 38px;
+        font-size: 0.85rem;
+        border-radius: 10px;
+      }
+
+      .input-wrapper i {
+        left: 11px;
+        font-size: 0.9rem;
+      }
+
+      .input-wrapper .toggle-password {
+        right: 11px;
+        font-size: 1rem;
+      }
+
+      .strength-bar {
+        height: 3px;
+      }
+
+      .strength-text {
+        font-size: 0.65rem;
+      }
+
+      .options {
+        margin: 15px 0 18px;
+      }
+
+      .checkbox-label {
+        font-size: 0.8rem;
+        gap: 6px;
+      }
+
+      .checkbox-label input {
+        width: 16px;
+        height: 16px;
+      }
+
+      .login-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+        border-radius: 30px;
+      }
+
+      #msg {
+        margin-top: 16px;
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+
+      .demo-hint {
+        margin-top: 16px;
+        padding: 10px;
+        font-size: 0.7rem;
+      }
+
+      .demo-hint summary {
+        font-size: 0.75rem;
+      }
+
+      .demo-hint li {
+        font-size: 0.7rem;
+        padding: 2px 0;
+      }
+    }
+
+    /* Juda kichik ekranlar (max-width: 360px) */
+    @media (max-width: 360px) {
+      body {
+        padding: 0.25rem;
+        padding-top: 0.5rem;
+      }
+
+      .login-card {
+        padding: 1.2rem 0.9rem;
+        border-radius: 16px;
+      }
+
+      .logo i {
+        font-size: 1.2rem;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+      }
+
+      .subhead {
+        font-size: 0.7rem;
+        margin-bottom: 1rem;
+      }
+
+      .input-group {
+        margin-bottom: 0.9rem;
+      }
+
+      .input-group label {
+        font-size: 0.6rem;
+        margin-bottom: 4px;
+      }
+
+      .input-wrapper input {
+        padding: 10px 10px 10px 35px;
+        font-size: 0.8rem;
+      }
+
+      .input-wrapper i {
+        left: 10px;
+        font-size: 0.85rem;
+      }
+
+      .input-wrapper .toggle-password {
+        right: 10px;
+        font-size: 0.9rem;
+      }
+
+      .login-btn {
+        padding: 11px;
+        font-size: 0.85rem;
+      }
+
+      #msg {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+      }
+
+      .demo-hint {
+        padding: 8px;
+        font-size: 0.65rem;
+      }
+
+      .demo-hint summary {
+        font-size: 0.7rem;
+      }
+    }
+
+    /* Katta ekranlar uchun qo'shimcha (min-width: 1400px) */
+    @media (min-width: 1400px) {
+      .login-card {
+        max-width: 480px;
+        padding: 3rem 2.5rem;
+        border-radius: 40px;
+      }
+
+      .logo i {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .subhead {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .input-wrapper input {
+        padding: 16px 18px 16px 50px;
+        font-size: 1.1rem;
+        border-radius: 18px;
+      }
+
+      .input-wrapper i {
+        left: 18px;
+        font-size: 1.2rem;
+      }
+
+      .login-btn {
+        padding: 18px;
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Landscape orientatsiya uchun (mobil gorizontal holat) */
+    @media (max-height: 500px) and (orientation: landscape) {
+      body {
+        align-items: flex-start;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .login-card {
+        padding: 1.2rem 1.5rem;
+      }
+
+      .subhead {
+        margin-bottom: 1rem;
+      }
+
+      .input-group {
+        margin-bottom: 0.8rem;
+      }
+
+      .demo-hint {
+        margin-top: 12px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="login-card">
+  <div class="logo">
+    <i class="fas fa-graduation-cap"></i>
+    <h2>EduTrack</h2>
+  </div>
+  <div class="subhead">Professional kirish tizimi • v2.0</div>
+
+  <!-- Login input -->
+  <div class="input-group">
+    <label>Foydalanuvchi nomi</label>
+    <div class="input-wrapper">
+      <i class="fas fa-user"></i>
+      <input type="text" id="user" placeholder="masalan: admin" autocomplete="username">
+    </div>
+  </div>
+
+  <!-- Parol input -->
+  <div class="input-group">
+    <label>Parol</label>
+    <div class="input-wrapper">
+      <i class="fas fa-lock"></i>
+      <input type="password" id="pass" placeholder="••••••••" autocomplete="current-password" onkeyup="updateStrength()">
+      <button class="toggle-password" type="button" onclick="togglePassword()">
+        <i class="far fa-eye" id="toggleIcon"></i>
+      </button>
+    </div>
+    <div class="strength-bar">
+      <div id="strengthFill"></div>
+    </div>
+    <div class="strength-text" id="strengthLabel"></div>
+  </div>
+
+  <div class="options">
+    <label class="checkbox-label">
+      <input type="checkbox" id="remember"> <span>Eslab qolish</span>
+    </label>
+  </div>
+
+  <button class="login-btn" onclick="handleLogin()">
+    <i class="fas fa-arrow-right-to-bracket"></i> Tizimga kirish
+  </button>
+
+  <div id="msg">
+    <i class="fas fa-shield-alt"></i>  Login va parolni kiriting
+</div>
+
+
+  <div class="demo-hint">
+    <details>
+      <summary><i class="fas fa-key"></i> Demo loginlar (bosish)</summary>
+      <ul>
+        <li><b>admin</b> / Admin2026</li>
+        <li><b>teacher</b> / Teach2026</li>
+        <li><b>student</b> / Stud2026</li>
+        <li><b>dekan</b> / Dekan2026</li>
+        <li><b>ofis</b> / Ofis2026</li>
+        <li><b>itadmin</b> / IT2026</li>
+        <li><b>magistr</b> / Mag2026</li>
+        <li><b>tyutor</b> / Tutor2026</li>
+        <li><b>parent</b> / Parent2026</li>
+      </ul>
+    </details>
+  </div>
+</div>
+
+<script>
+  (function(){
+    // ---------- Foydalanuvchilar bazasi ----------
+    const users = [
+      { u: "admin",    p: "Admin2026",  role: "Admin" },
+      { u: "teacher",  p: "Teach2026",  role: "O'qituvchi" },
+      { u: "student",  p: "Stud2026",   role: "Talaba" },
+      { u: "dekan",    p: "Dekan2026",  role: "Dekan" },
+      { u: "ofis",     p: "Ofis2026",   role: "O'quv bo'limi" },
+      { u: "itadmin",  p: "IT2026",     role: "IT Admin" },
+      { u: "magistr",  p: "Mag2026",    role: "Magistr" },
+      { u: "tyutor",   p: "Tutor2026",  role: "Tyutor" },
+      { u: "parent",   p: "Parent2026", role: "Ota-ona" }
+    ];
+
+    const userInput = document.getElementById('user');
+    const passInput = document.getElementById('pass');
+    const rememberCheck = document.getElementById('remember');
+    const msgDiv = document.getElementById('msg');
+    const strengthFill = document.getElementById('strengthFill');
+    const strengthLabel = document.getElementById('strengthLabel');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    let urinishSoni = 0;
+    let bloklangan = false;
+    let blokTimer = null;
+    let qolganVaqt = 0;
+
+    // Avval login qilinganmi tekshirish
+    const authUser = sessionStorage.getItem('eduTrackAuth');
+    if (authUser) {
+      window.location.href = 'dashboard.html';
+    }
+
+    function xabarChiqarish(text, type = 'info') {
+      msgDiv.innerHTML = text;
+      if (type === 'success') {
+        msgDiv.style.color = '#0b5e42';
+        msgDiv.style.background = '#d1fae5';
+      } else if (type === 'error') {
+        msgDiv.style.color = '#b91c1c';
+        msgDiv.style.background = '#fee2e2';
+      } else {
+        msgDiv.style.color = '#1e293b';
+        msgDiv.style.background = 'rgba(255,255,255,0.5)';
+      }
+    }
+
+    window.updateStrength = function() {
+      const p = passInput.value;
+      let ball = 0;
+      if (p.length >= 8) ball++;
+      if (/[A-Z]/.test(p)) ball++;
+      if (/[0-9]/.test(p)) ball++;
+      if (/[!@#$%^&*]/.test(p)) ball++;
+
+      let foiz = 0, label = '', color = '#e2e8f0';
+      if (p.length === 0) {
+        foiz = 0; label = 'Parolni kiriting'; color = '#cbd5e1';
+      } else if (ball <= 1) {
+        foiz = 30; label = 'Kuchsiz parol'; color = '#ef4444';
+      } else if (ball === 2) {
+        foiz = 60; label = 'O\'rtacha parol'; color = '#f59e0b';
+      } else {
+        foiz = 100; label = 'Kuchli parol ✓'; color = '#10b981';
+      }
+      strengthFill.style.width = foiz + '%';
+      strengthFill.style.background = color;
+      strengthLabel.textContent = label;
+      strengthLabel.style.color = color;
+    };
+
+    window.togglePassword = function() {
+      const type = passInput.type === 'password' ? 'text' : 'password';
+      passInput.type = type;
+      toggleIcon.className = type === 'password' ? 'far fa-eye' : 'far fa-eye-slash';
+    };
+
+    function bloklashniBoshlash() {
+      if (bloklangan) return;
+      bloklangan = true;
+      qolganVaqt = 10;
+      if (blokTimer) clearInterval(blokTimer);
+      
+      blokTimer = setInterval(() => {
+        if (qolganVaqt <= 0) {
+          clearInterval(blokTimer);
+          blokTimer = null;
+          bloklangan = false;
+          urinishSoni = 0;
+          xabarChiqarish('<i class="fas fa-unlock-alt"></i> Blok ochildi. Qayta urinib ko\'ring.', 'info');
+        } else {
+          xabarChiqarish(`<i class="fas fa-hourglass-half"></i> Bloklangan! ${qolganVaqt} soniya kuting.`, 'error');
+          qolganVaqt--;
+        }
+      }, 1000);
+    }
+
+    window.handleLogin = function() {
+      if (bloklangan) {
+        xabarChiqarish(`⛔ Bloklangan. ${qolganVaqt} soniya kuting.`, 'error');
+        return;
+      }
+
+      const username = userInput.value.trim();
+      const parol = passInput.value;
+
+      if (!username || !parol) {
+        xabarChiqarish('<i class="fas fa-exclamation-triangle"></i> Login va parolni to\'ldiring!', 'error');
+        return;
+      }
+
+      const foundUser = users.find(u => u.u === username && u.p === parol);
+
+      if (foundUser) {
+        urinishSoni = 0;
+        
+        // Auth ma'lumotlarini saqlash
+        const authData = {
+          username: foundUser.u,
+          role: foundUser.role,
+          loginTime: new Date().toISOString()
+        };
+        
+        // Session storage ga saqlash (brauzer yopilganda o'chadi)
+        sessionStorage.setItem('eduTrackAuth', JSON.stringify(authData));
+        
+        // Remember me uchun localStorage
+        if (rememberCheck.checked) {
+          localStorage.setItem('rememberedUser', username);
+        } else {
+          localStorage.removeItem('rememberedUser');
+        }
+
+        xabarChiqarish(`✅ Xush kelibsiz, ${foundUser.role}! Yo'naltirilmoqda...`, 'success');
+        
+        // Dashboardga yo'naltirish
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 800);
+        
+      } else {
+        urinishSoni++;
+        const qoldi = 3 - urinishSoni;
+        
+        if (urinishSoni >= 3) {
+          xabarChiqarish('❌ 3 marta xato! 10 soniyaga bloklandi.', 'error');
+          bloklashniBoshlash();
+        } else {
+          xabarChiqarish(`❌ Xato! Urinish: ${urinishSoni}/3. Qolgan: ${qoldi}`, 'error');
+        }
+      }
+    };
+
+    // Sahifa yuklanganda
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedUser = localStorage.getItem('rememberedUser');
+      if (savedUser) {
+        userInput.value = savedUser;
+        rememberCheck.checked = true;
+      }
+      updateStrength();
+      
+      passInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleLogin();
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
